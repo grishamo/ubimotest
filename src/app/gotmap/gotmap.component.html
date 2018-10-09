@@ -1,3 +1,16 @@
-<div class="gotmap-container">
+<div id="gotmap-container">
+  <img src="assets/got-map.png" alt="">
 
+  <div *ngFor="let ad of currentAds;"
+       class="displayedAdContainer"
+       [style.top.px]="ad.coordinates.y"
+       [style.left.px]="ad.coordinates.x">
+
+    <img *ngIf="ad.type === 'IMAGE'" [src]="ad.creative.url" (load)="adLoaded(ad)"/>
+
+    <video *ngIf="ad.type === 'VIDEO'" autoplay muted (loadeddata)="adLoaded(ad)">
+      <source [src]="ad.creative.url">
+    </video>
+
+  </div>
 </div>

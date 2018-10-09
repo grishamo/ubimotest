@@ -1,5 +1,21 @@
-.gotmap-container{
+#gotmap-container {
   height: 100vh;
-  background: url("images/got-map.png"), no-repeat;
-  background-size: cover;
+  overflow-y: scroll;
+  overflow-x: auto;
+  background-color: #b6ceeb;
+  position: relative;
+}
+
+.displayedAdContainer {
+  background: #ffffff;
+  display: inline-block;
+  padding: 5px;
+  position: absolute;
+  width: auto;
+  height: auto;
+}
+
+.displayedAdContainer img, .displayedAdContainer video {
+  max-width: 100px;
+  height: auto;
 }

@@ -6,6 +6,8 @@ import { AppComponent } from './app.component';
 import { GotmapComponent } from './gotmap/gotmap.component';
 import { AdhistoryComponent } from './adhistory/adhistory.component';
 
+import { AdDispatcher } from 'ubimo-fed-home-assigment';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -16,7 +18,7 @@ import { AdhistoryComponent } from './adhistory/adhistory.component';
     BrowserModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [AdDispatcher],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
