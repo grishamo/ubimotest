@@ -47,8 +47,13 @@ export class GotmapComponent implements OnInit {
   }
 
   // Execute method when ad is loaded
-  adLoaded(ad) {
+  adLoaded(ad, elem) {
     this.scrollContainerTo(ad.coordinates.y);
+
+    if (ad.type === 'VIDEO') {
+      elem.muted = true;
+      elem.play();
+    }
 
     if (!ad.selected) {
       setTimeout(() => {

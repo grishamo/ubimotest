@@ -8,7 +8,7 @@
 
     <img *ngIf="ad.type === 'IMAGE'" [src]="ad.creative.url" (load)="adLoaded(ad)"/>
 
-    <video *ngIf="ad.type === 'VIDEO'" autoplay muted (loadeddata)="adLoaded(ad)">
+    <video *ngIf="ad.type === 'VIDEO'" (loadeddata)="adLoaded(ad, $event.target)">
       <source [src]="ad.creative.url">
     </video>
 
