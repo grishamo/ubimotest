@@ -1,5 +1,6 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, HostListener, OnInit} from '@angular/core';
 import {AdDispatcher} from 'ubimo-fed-home-assigment';
+import {CommunicationService} from "../communication.service";
 
 @Component({
   selector: 'app-adhistory',
@@ -11,14 +12,19 @@ export class AdhistoryComponent implements OnInit {
   // data = {coordinates: object, creative: object, type: string}
   allAds: Array<{ date: Date, data: any }> = [];
   filteredItems: Array<{ date: Date, data: any }> = [];
-  startDate: string = '';
-  endDate: string = '';
+  startDate = '';
+  endDate = '';
 
-  constructor(adDispatcher: AdDispatcher) {
-    adDispatcher.registerToAdEvents((ad) => this.adDispatcherCallback(ad));
-  }
+  constructor(private adDispatcher: AdDispatcher,
+              private communicationService: CommunicationService) {}
 
   ngOnInit() {
+    this.adDispatcher.registerToAdEvents((ad) => this.adDispatcherCallback(ad));
+  }
+
+  adClick(ad) {
+    ad.selected = !ad.selected;
+    this.communicationService.displayAd(ad);
   }
 
   adDispatcherCallback(data) {

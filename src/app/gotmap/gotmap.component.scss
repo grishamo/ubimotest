@@ -6,16 +6,31 @@
   position: relative;
 }
 
+.displayedAdContainer:before {
+  content: '';
+  position: absolute;
+  background: #ea6161;
+  border: 1px solid #65e4ff;
+  border-radius: 6px;
+  width: 12px;
+  top: -6px;
+  left: -6px;
+  height: 12px;
+}
 .displayedAdContainer {
-  background: #ffffff;
+  background: #6699bf;
   display: inline-block;
+  border: 1px solid #65e4ff;
   padding: 5px;
+  border-radius: 6px;
   position: absolute;
   width: auto;
   height: auto;
+  box-shadow: 2px 6px 20px 0 #00000054;
 }
 
 .displayedAdContainer img, .displayedAdContainer video {
-  max-width: 100px;
+  max-width: 150px;
   height: auto;
+  display: inherit;
 }

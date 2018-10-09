@@ -13,10 +13,10 @@
   </div>
 
   <ul class="adHistoryList">
-    <li *ngFor="let ad of filteredItems;">
+    <li *ngFor="let ad of filteredItems;" (click)="adClick(ad.data)" [ngClass]="{'adSelected': ad.data.selected}">
       <span class="adTime">{{formatAMPM(ad.date)}}</span>
-      <span class="adIcon" *ngIf="ad.date.type === 'IMAGE'"><img src="assets/ic_image_black_24px.svg"/></span>
-      <span class="adIcon" *ngIf="ad.date.type === 'VIDEO'"><img src="assets/ic_movie_creation_black_24px.svg"/></span>
+      <span class="adIcon" *ngIf="ad.data.type === 'IMAGE'"><img src="assets/ic_image_black_24px.svg"/></span>
+      <span class="adIcon" *ngIf="ad.data.type === 'VIDEO'"><img src="assets/ic_movie_creation_black_24px.svg"/></span>
       <span class="adName">{{ad.data.creative.name}}</span>
       <span class="adLinkIcon"><img src="assets/ic_insert_link_black_24px.svg"/></span>
     </li>

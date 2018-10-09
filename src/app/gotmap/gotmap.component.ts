@@ -1,5 +1,6 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { AdDispatcher } from 'ubimo-fed-home-assigment';
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {AdDispatcher} from 'ubimo-fed-home-assigment';
+import {CommunicationService} from '../communication.service';
 
 @Component({
   selector: 'app-gotmap',
@@ -10,14 +11,26 @@ import { AdDispatcher } from 'ubimo-fed-home-assigment';
 export class GotmapComponent implements OnInit {
 
   currentAdTime = 5000; // Ad duration
-  currentAds: Array<{coordinates: object, creative: object, type: string}> = [];
+  currentAds: Array<{ coordinates: object, creative: object, type: string }> = [];
 
-  constructor(adDispatcher: AdDispatcher) {
-    adDispatcher.registerToAdEvents((ad) => this.adDispatcherCallback(ad));
+  constructor(private adDispatcher: AdDispatcher,
+              private communicationService: CommunicationService) {
   }
 
 
   ngOnInit() {
+    this.adDispatcher.registerToAdEvents((ad) => this.adDispatcherCallback(ad));
+    this.communicationService.adClick.subscribe(ad => this.adSelected(ad));
+  }
+
+  adSelected(ad) {
+    if (ad.selected === false) {
+      const index = this.currentAds.indexOf(ad);
+      this.currentAds.splice(index, 1);
+    } else {
+      this.currentAds.push(ad);
+      this.scrollContainerTo(ad.coordinates.y);
+    }
   }
 
   adDispatcherCallback(ad) {
@@ -37,13 +50,15 @@ export class GotmapComponent implements OnInit {
   adLoaded(ad) {
     this.scrollContainerTo(ad.coordinates.y);
 
-    setTimeout(() => {
-      const index = this.currentAds.indexOf(ad);
+    if (!ad.selected) {
+      setTimeout(() => {
+        const index = this.currentAds.indexOf(ad);
 
-      if (index !== -1) {
-        this.currentAds.splice(index, 1);
-      }
-    }, this.currentAdTime);
+        if (index !== -1) {
+          this.currentAds.splice(index, 1);
+        }
+      }, this.currentAdTime);
+    }
   }
 
 }
