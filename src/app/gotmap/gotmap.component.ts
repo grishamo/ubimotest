@@ -9,7 +9,7 @@ import { AdDispatcher } from 'ubimo-fed-home-assigment';
 })
 export class GotmapComponent implements OnInit {
 
-  currentAdTime = 5000;
+  currentAdTime = 5000; // Ad duration
   currentAds: Array<{coordinates: object, creative: object, type: string}> = [];
 
   constructor(adDispatcher: AdDispatcher) {
@@ -27,13 +27,14 @@ export class GotmapComponent implements OnInit {
     this.currentAds.push(ad);
   }
 
+  // Scroll ads container element to current ad
   scrollContainerTo(val) {
     const container = document.getElementById('gotmap-container');
     container.scrollTop = val;
   }
 
+  // Execute method when ad is loaded
   adLoaded(ad) {
-
     this.scrollContainerTo(ad.coordinates.y);
 
     setTimeout(() => {

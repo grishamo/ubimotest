@@ -1,13 +1,24 @@
-<h1>Ads</h1>
+<div id="adHistoryContainer">
+  <h1>Ads</h1>
 
-<input type="date" />
-<input type="date" />
+  <div class="adInputFilter">
+    <div class="inputContainer">
+      <label>Start Date:</label>
+      <input type="time" step="1"  [(ngModel)]="startDate" (input)="filterItems()" />
+    </div>
+    <div class="inputContainer">
+      <label>End Date:</label>
+      <input type="time"  step="1" [(ngModel)]="endDate" (input)="filterItems()"/>
+    </div>
+  </div>
 
-<ul>
-  <li>
-    <span>16:34:02</span>
-    <span>icon</span>
-    <span>Baby me</span>
-    <span>link</span>
-  </li>
-</ul>
+  <ul class="adHistoryList">
+    <li *ngFor="let ad of filteredItems;">
+      <span class="adTime">{{formatAMPM(ad.date)}}</span>
+      <span class="adIcon" *ngIf="ad.date.type === 'IMAGE'"><img src="assets/ic_image_black_24px.svg"/></span>
+      <span class="adIcon" *ngIf="ad.date.type === 'VIDEO'"><img src="assets/ic_movie_creation_black_24px.svg"/></span>
+      <span class="adName">{{ad.data.creative.name}}</span>
+      <span class="adLinkIcon"><img src="assets/ic_insert_link_black_24px.svg"/></span>
+    </li>
+  </ul>
+</div>
